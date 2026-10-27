@@ -1,0 +1,13 @@
+{
+  "id": "c33",
+  "slug": "live-speech-pace",
+  "name": "直播语速告警器",
+  "version": "0.1.0",
+  "repo": "campfire-code/live-speech-pace",
+  "license": "MIT",
+  "ui": {
+    "layout": "b",
+    "palette": "teal"
+  },
+  "upstream": null
+}

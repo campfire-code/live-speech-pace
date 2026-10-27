@@ -1,0 +1,63 @@
+/* 直播语速告警器：只用 kit.css 的变量。类名统一以 ls- 开头。 */
+.ls-root { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(280px, 1fr); gap: 16px; align-items: start; border-radius: var(--radius-lg); }
+.ls-left, .ls-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.ls-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 14px 16px; display: grid; gap: 10px; }
+.ls-card h3 { margin: 0; font-size: 1em; font-weight: 700; }
+.ls-card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.ls-stats { display: flex; gap: 14px; font-size: .92em; }
+.ls-stats b { color: var(--ink); }
+.ls-hint { margin: 0; font-size: .86em; line-height: 1.5; }
+
+/* ---- 大号读数 ---- */
+.ls-hero { --z: var(--muted); position: relative; display: grid; gap: 10px; padding: 16px 22px 18px; border-radius: var(--radius-lg); border: 1px solid var(--line); border-left: 6px solid var(--z); background: var(--surface); }
+.ls-hero.z-ok { --z: var(--ok); }
+.ls-hero.z-warn { --z: var(--warn); }
+.ls-hero.z-over { --z: var(--err); background: var(--err-soft); }
+.ls-hero-top { display: flex; justify-content: space-between; align-items: center; font-size: .93em; }
+.ls-state { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+.ls-state i { width: 9px; height: 9px; border-radius: 50%; background: var(--line-strong); }
+.ls-state i.live { background: var(--ok); box-shadow: 0 0 0 4px var(--ok-soft); }
+.ls-read { display: flex; align-items: baseline; justify-content: center; gap: 14px; padding: 6px 0 0; }
+.ls-num { font-size: clamp(88px, 15vw, 150px); line-height: 1; font-weight: 800; letter-spacing: -.02em; color: var(--z); }
+.ls-unit { color: var(--muted); font-size: 1.15em; }
+.ls-line { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; color: var(--muted); }
+.ls-line b { color: var(--ink); }
+.ls-zone { font-weight: 700; }
+.ls-zone.z-ok { color: var(--ok); }
+.ls-zone.z-warn { color: var(--warn); }
+.ls-zone.z-over { color: var(--err); }
+.ls-meter { height: 6px; border-radius: 3px; background: var(--chip); overflow: hidden; margin: 2px auto 0; width: min(100%, 360px); }
+.ls-meter i { display: block; height: 100%; background: var(--z); transition: width .12s linear; }
+.ls-actions { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+.ls-error { padding: 8px 12px; border-radius: 8px; background: var(--err-soft); color: var(--err); font-size: .92em; line-height: 1.5; }
+.ls-banner { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 9px 12px; border-radius: 10px; background: var(--err); color: #fff; font-weight: 700; }
+
+/* 报警时整块闪红：每秒约 1.5 次，幅度柔和，开启「减少动态效果」时只保持常亮 */
+.ls-root.alert .ls-hero { animation: ls-flash .7s ease-in-out infinite alternate; }
+@keyframes ls-flash { from { box-shadow: 0 0 0 0 transparent; } to { box-shadow: 0 0 0 5px var(--err), 0 0 26px 4px var(--err-soft); } }
+@media (prefers-reduced-motion: reduce) { .ls-root.alert .ls-hero { animation: none; box-shadow: 0 0 0 5px var(--err); } }
+
+/* ---- 曲线 ---- */
+.ls-svg { width: 100%; height: 190px; display: block; }
+.ls-svg .grid { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.ls-svg .axis { fill: var(--muted); font-size: 11px; }
+.ls-svg .th { stroke: var(--err); stroke-width: 1.5; stroke-dasharray: 6 4; vector-effect: non-scaling-stroke; }
+.ls-svg .th-t { fill: var(--err); font-size: 11px; font-weight: 600; }
+.ls-svg .line { fill: none; stroke: var(--primary); stroke-width: 2; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.ls-log { display: flex; align-items: center; gap: 8px; font-size: .92em; }
+.ls-log b { color: var(--ink); }
+
+/* ---- 设置 ---- */
+.ls-th { display: flex; align-items: center; gap: 10px; }
+.ls-th .k-input { width: 110px; font-size: 1.3em; font-weight: 700; height: 40px; }
+.ls-range { width: 100%; accent-color: var(--primary); }
+.ls-presets { display: flex; gap: 6px; flex-wrap: wrap; }
+.ls-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.ls-row-l { display: inline-flex; align-items: center; gap: 4px; color: var(--muted); white-space: nowrap; font-size: .93em; }
+.ls-row-c { min-width: 0; flex: 1; display: flex; justify-content: flex-end; }
+.ls-row-c .k-seg { max-width: 100%; }
+.ls-row-c .ls-range { max-width: 180px; }
+.ls-privacy { display: flex; align-items: center; gap: 8px; margin: 0; padding: 0 4px; color: var(--muted); font-size: .9em; }
+.ls-privacy svg { color: var(--ok); flex: none; }
+
+@media (max-width: 900px) { .ls-root { grid-template-columns: 1fr; } }
